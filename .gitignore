@@ -1,0 +1,6 @@
+# Public repo (TX_project): publish ONLY the Allen scoping artifacts.
+# Internal notes (archive/, Chart/) and anything else stay private.
+/*
+!/.gitignore
+!/README.md
+!/Allen_scoping/
