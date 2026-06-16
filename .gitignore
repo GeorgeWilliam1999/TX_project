@@ -1,6 +1,5 @@
-# Public repo (TX_project): publish ONLY the Allen scoping artifacts.
-# Internal notes (archive/, Chart/) and anything else stay private.
-/*
-!/.gitignore
-!/README.md
-!/Allen_scoping/
+# TX_project — consolidated track-extrapolation repo (public).
+# Publishes everything; only transient caches are ignored.
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
