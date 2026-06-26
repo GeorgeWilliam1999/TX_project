@@ -1,0 +1,154 @@
+{
+  "tier": 1,
+  "variant_set": "v3_fullunroll_ilp",
+  "n_tracks": 1000000,
+  "block_size": 256,
+  "warmup_iters": 200,
+  "timed_repeats": 50,
+  "published_baselines_ns_per_track": {
+    "extrapUTT": 2.344,
+    "rk_field": 5.709,
+    "pinn_v2_baseline": 7.054
+  },
+  "device_props": {
+    "sm": 80,
+    "clock_ghz": 1.38,
+    "fp32_peak_tflop": 14.1312
+  },
+  "methods": {
+    "pinn_ref": {
+      "ns_per_track": 7.0307841300964355,
+      "single_warp_us": 179.19999361038208,
+      "macs_per_track": 10176,
+      "pct_fp32_peak": 20.48444902666345,
+      "resources": {
+        "num_regs": 124,
+        "local_size_bytes": 384,
+        "shared_size_bytes": 0,
+        "occ": 0.25
+      },
+      "accuracy_vs_ref": {
+        "finite": true,
+        "max_pos_delta_um": 0.0,
+        "max_slope_delta_rad": 0.0,
+        "bit_exact": true
+      }
+    },
+    "pinn_fused": {
+      "ns_per_track": 4.8455681800842285,
+      "single_warp_us": 236.54399812221527,
+      "macs_per_track": 10176,
+      "pct_fp32_peak": 29.72236356561416,
+      "resources": {
+        "num_regs": 128,
+        "local_size_bytes": 0,
+        "shared_size_bytes": 0,
+        "occ": 0.25
+      },
+      "accuracy_vs_ref": {
+        "finite": true,
+        "max_pos_delta_um": 0.0,
+        "max_slope_delta_rad": 0.0,
+        "bit_exact": true
+      }
+    },
+    "pinn_fused_fu": {
+      "ns_per_track": 5.08569598197937,
+      "single_warp_us": 215.03999829292297,
+      "macs_per_track": 10176,
+      "pct_fp32_peak": 28.31898321110044,
+      "resources": {
+        "num_regs": 128,
+        "local_size_bytes": 0,
+        "shared_size_bytes": 0,
+        "occ": 0.25
+      },
+      "accuracy_vs_ref": {
+        "finite": true,
+        "max_pos_delta_um": 0.0,
+        "max_slope_delta_rad": 0.0,
+        "bit_exact": true
+      }
+    },
+    "pinn_fused_ilp4": {
+      "ns_per_track": 4.816895961761475,
+      "single_warp_us": 220.15999257564545,
+      "macs_per_track": 10176,
+      "pct_fp32_peak": 29.899283744913586,
+      "resources": {
+        "num_regs": 128,
+        "local_size_bytes": 0,
+        "shared_size_bytes": 0,
+        "occ": 0.25
+      },
+      "accuracy_vs_ref": {
+        "finite": true,
+        "max_pos_delta_um": 0.48828125,
+        "max_slope_delta_rad": 5.960464477539063e-08,
+        "bit_exact": false
+      }
+    },
+    "pinn_h64": {
+      "ns_per_track": 2.2702078819274902,
+      "single_warp_us": 98.30400347709656,
+      "macs_per_track": 4736,
+      "pct_fp32_peak": 29.52548356511576,
+      "resources": {
+        "num_regs": 95,
+        "local_size_bytes": 0,
+        "shared_size_bytes": 0,
+        "occ": 0.25
+      },
+      "accuracy_vs_ref": {
+        "finite": true,
+        "max_pos_delta_um": 57381.103515625,
+        "max_slope_delta_rad": 0.0077880024909973145,
+        "bit_exact": false
+      }
+    },
+    "pinn_h64_fu": {
+      "ns_per_track": 0.9077759981155396,
+      "single_warp_us": 27.648000046610832,
+      "macs_per_track": 4736,
+      "pct_fp32_peak": 73.83868448426975,
+      "resources": {
+        "num_regs": 96,
+        "local_size_bytes": 0,
+        "shared_size_bytes": 0,
+        "occ": 0.25
+      },
+      "accuracy_vs_ref": {
+        "finite": true,
+        "max_pos_delta_um": 57381.103515625,
+        "max_slope_delta_rad": 0.0077880024909973145,
+        "bit_exact": false
+      }
+    }
+  },
+  "speedup_vs_ref": {
+    "pinn_ref": 1.0,
+    "pinn_fused": 1.4509720777418145,
+    "pinn_fused_fu": 1.382462529221031,
+    "pinn_fused_ilp4": 1.4596088821327524,
+    "pinn_h64": 3.0969781164388523,
+    "pinn_h64_fu": 7.745065021207549
+  },
+  "block_sweep_ns": {
+    "pinn_fused_fu": {
+      "64": 5.494271993637085,
+      "96": 5.577215909957886,
+      "128": 5.34169602394104,
+      "192": 5.273600101470947,
+      "256": 5.084671974182129,
+      "384": 5.0278401374816895
+    },
+    "pinn_h64_fu": {
+      "64": 1.0936319828033447,
+      "96": 1.129472017288208,
+      "128": 1.0516480207443237,
+      "192": 1.1233279705047607,
+      "256": 0.9093120098114014,
+      "384": 0.9687039852142334
+    }
+  }
+}

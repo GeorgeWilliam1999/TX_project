@@ -1,0 +1,203 @@
+{
+  "tier": 1,
+  "variant_set": "fp32_inkernel_v1",
+  "n_tracks": 1000000,
+  "block_size": 256,
+  "warmup_iters": 200,
+  "timed_repeats": 50,
+  "macs_per_track": 10176,
+  "dtype": "fp32",
+  "published_baselines_ns_per_track": {
+    "extrapUTT": 2.344,
+    "rk_field": 5.709,
+    "pinn_v2_baseline": 7.054
+  },
+  "toolchain": {
+    "compiler": "NVRTC",
+    "cupy": "14.1.1",
+    "cc": "70",
+    "nvrtc_options": [
+      "--std=c++20",
+      "-I/data/bfys/gscriven/track-extrapolation-pinn/allen_bridge/bench/shims",
+      "-I/data/bfys/gscriven/track-extrapolation-pinn/candidate/pinn_v2_ALLEN_v1",
+      "-I/data/bfys/gscriven/pinn_opt_work"
+    ],
+    "compile_seconds": 0.88
+  },
+  "gpu": {
+    "nvidia_smi_error": "[Errno 2] No such file or directory: 'nvidia-smi'"
+  },
+  "device_props": {
+    "sm_count": 80,
+    "clock_ghz": 1.38,
+    "fp32_peak_tflop": 14.1312
+  },
+  "methods": {
+    "pinn_ref": {
+      "kernel_only_ms": {
+        "min": 7.0062079429626465,
+        "p25": 7.028736114501953,
+        "median": 7.03385591506958,
+        "p75": 7.043840050697327,
+        "max": 7.098368167877197,
+        "iqr": 0.015103936195373535,
+        "rel_iqr": 0.002147319532521889
+      },
+      "single_warp_us": {
+        "min": 177.15199291706085,
+        "p25": 178.17600071430206,
+        "median": 178.17600071430206,
+        "p75": 178.17600071430206,
+        "max": 193.53599846363068,
+        "iqr": 0.0,
+        "rel_iqr": 0.0
+      },
+      "single_warp_tracks": 32,
+      "ns_per_track": 7.03385591506958,
+      "tracks_per_s": 142169531.48806542,
+      "pct_fp32_peak": 20.47550317627029,
+      "accuracy_vs_ref": {
+        "max_abs_err": 0.0,
+        "max_rel_err": 0.0,
+        "finite": true
+      },
+      "resources": {
+        "num_regs": 124,
+        "local_size_bytes": 384,
+        "shared_size_bytes": 0,
+        "const_size_bytes": 0,
+        "max_threads_per_block": 512,
+        "theoretical_occupancy": 0.25
+      }
+    },
+    "pinn_fused": {
+      "kernel_only_ms": {
+        "min": 4.791296005249023,
+        "p25": 4.794367790222168,
+        "median": 4.795392036437988,
+        "p75": 4.798463821411133,
+        "max": 4.811776161193848,
+        "iqr": 0.004096031188964844,
+        "rel_iqr": 0.0008541598179754602
+      },
+      "single_warp_us": {
+        "min": 227.32800245285034,
+        "p25": 227.32800245285034,
+        "median": 227.32800245285034,
+        "p75": 228.35199534893036,
+        "max": 229.37600314617157,
+        "iqr": 1.023992896080017,
+        "rel_iqr": 4.5044732062536
+      },
+      "single_warp_tracks": 32,
+      "ns_per_track": 4.795392036437988,
+      "tracks_per_s": 208533523.93327966,
+      "pct_fp32_peak": 30.033360783869085,
+      "accuracy_vs_ref": {
+        "max_abs_err": 0.00048828125,
+        "max_rel_err": 0.002217742847278714,
+        "finite": true
+      },
+      "resources": {
+        "num_regs": 128,
+        "local_size_bytes": 0,
+        "shared_size_bytes": 0,
+        "const_size_bytes": 0,
+        "max_threads_per_block": 512,
+        "theoretical_occupancy": 0.25
+      }
+    },
+    "pinn_warp": {
+      "kernel_only_ms": {
+        "min": 8.311807632446289,
+        "p25": 8.31488037109375,
+        "median": 8.316927909851074,
+        "p75": 8.319999694824219,
+        "max": 8.366080284118652,
+        "iqr": 0.00511932373046875,
+        "rel_iqr": 0.0006155306124999728
+      },
+      "single_warp_us": {
+        "min": 17.40800030529499,
+        "p25": 18.432000651955605,
+        "median": 18.432000651955605,
+        "p75": 19.45599913597107,
+        "max": 20.479999482631683,
+        "iqr": 1.0239984840154648,
+        "rel_iqr": 55.55547134308615
+      },
+      "single_warp_tracks": 1,
+      "ns_per_track": 8.316927909851074,
+      "tracks_per_s": 120236704.0858367,
+      "pct_fp32_peak": 17.316699229753652,
+      "accuracy_vs_ref": {
+        "max_abs_err": 0.00048828125,
+        "max_rel_err": 0.002217742847278714,
+        "finite": true
+      },
+      "resources": {
+        "num_regs": 40,
+        "local_size_bytes": 0,
+        "shared_size_bytes": 0,
+        "const_size_bytes": 0,
+        "max_threads_per_block": 1024,
+        "theoretical_occupancy": 0.75
+      }
+    },
+    "pinn_warp_u4": {
+      "kernel_only_ms": {
+        "min": 8.343551635742188,
+        "p25": 8.351743698120117,
+        "median": 8.354816436767578,
+        "p75": 8.357888221740723,
+        "max": 8.460288047790527,
+        "iqr": 0.006144523620605469,
+        "rel_iqr": 0.0007354468727242011
+      },
+      "single_warp_us": {
+        "min": 27.648000046610832,
+        "p25": 28.672000393271446,
+        "median": 28.672000393271446,
+        "p75": 28.672000393271446,
+        "max": 30.719999223947525,
+        "iqr": 0.0,
+        "rel_iqr": 0.0
+      },
+      "single_warp_tracks": 1,
+      "ns_per_track": 8.354816436767578,
+      "tracks_per_s": 119691438.77287784,
+      "pct_fp32_peak": 17.23816917109382,
+      "accuracy_vs_ref": {
+        "max_abs_err": 0.00048828125,
+        "max_rel_err": 0.002217742847278714,
+        "finite": true
+      },
+      "resources": {
+        "num_regs": 34,
+        "local_size_bytes": 0,
+        "shared_size_bytes": 0,
+        "const_size_bytes": 0,
+        "max_threads_per_block": 1024,
+        "theoretical_occupancy": 0.75
+      }
+    }
+  },
+  "summary_vs_ref": {
+    "pinn_ref": {
+      "ns_per_track": 7.03385591506958,
+      "speedup_vs_ref": 1.0
+    },
+    "pinn_fused": {
+      "ns_per_track": 4.795392036437988,
+      "speedup_vs_ref": 1.466794760808403
+    },
+    "pinn_warp": {
+      "ns_per_track": 8.316927909851074,
+      "speedup_vs_ref": 0.8457276522426332
+    },
+    "pinn_warp_u4": {
+      "ns_per_track": 8.354816436767578,
+      "speedup_vs_ref": 0.8418923345957953
+    }
+  }
+}

@@ -1,0 +1,12 @@
+host: wn-lot-008.nikhef.nl  date: Mon Jun 22 15:44:18 CEST 2026
+compiled 29.78s cc70 80SM @ 1.380GHz peak=14.1TF
+pinn_ref             7.031 ns warp=  179.2us regs=124 spill=384B occ=0.25 %pk= 20.5 dpos=0um bitexact=True
+pinn_fused           4.846 ns warp=  236.5us regs=128 spill=0B occ=0.25 %pk= 29.7 dpos=0um bitexact=True
+pinn_fused_fu        5.086 ns warp=  215.0us regs=128 spill=0B occ=0.25 %pk= 28.3 dpos=0um bitexact=True
+pinn_fused_ilp4      4.817 ns warp=  220.2us regs=128 spill=0B occ=0.25 %pk= 29.9 dpos=0.488um bitexact=False
+pinn_h64             2.270 ns warp=   98.3us regs= 95 spill=0B occ=0.25 %pk= 29.5 dpos=5.74e+04um bitexact=False
+pinn_h64_fu          0.908 ns warp=   27.6us regs= 96 spill=0B occ=0.25 %pk= 73.8 dpos=5.74e+04um bitexact=False
+pinn_fused_fu sweep: {64: 5.494, 96: 5.577, 128: 5.342, 192: 5.274, 256: 5.085, 384: 5.028}
+pinn_h64_fu sweep: {64: 1.094, 96: 1.129, 128: 1.052, 192: 1.123, 256: 0.909, 384: 0.969}
+
+wrote /data/bfys/gscriven/pinn_opt_work/results/tier1_opt_v3.json

@@ -1,0 +1,235 @@
+{
+  "tier": 1,
+  "description": "Isolated CUDA micro-bench: RK+field vs extrapUTT vs PINN_V2_UTT over the same gen-4 population. NVRTC-compiled verbatim Allen device code.",
+  "n_tracks": 1000000,
+  "block_size": 256,
+  "warmup_iters": 200,
+  "timed_repeats": 50,
+  "dtype": "fp32 (KalmanFloat=float, KALMAN_DOUBLE_PRECISION=OFF)",
+  "timing": "CUDA events (cudaEventElapsedTime), device-synchronised per repeat",
+  "unit": "one track, one extrapolation across its given dz (state->state)",
+  "rk_step_dz_mm": 100.0,
+  "rk_stages_cashkarp": 6,
+  "toolchain": {
+    "compiler": "NVRTC",
+    "nvrtc_version": [
+      12,
+      8
+    ],
+    "cupy_version": "14.1.1",
+    "target_compute_capability": "70",
+    "nvrtc_options": [
+      "--std=c++20",
+      "-DMAGFIELD_USE_TEXTURE",
+      "-I/data/bfys/gscriven/track-extrapolation-pinn/allen_bridge/bench/shims",
+      "-I/data/bfys/gscriven/track-extrapolation-pinn/allen_bridge/bench",
+      "-I/data/bfys/gscriven/Allen/device/kalman/ParKalman/include",
+      "-I/data/bfys/gscriven/Allen/device/event_model/common/include"
+    ],
+    "compile_seconds": 1.817,
+    "note": "production Allen GPU build uses nvcc -O3 -arch=sm_70/80 with the SAME verbatim device code; NVRTC targets sm_70 here."
+  },
+  "gpu": {
+    "nvidia_smi_error": "[Errno 2] No such file or directory: 'nvidia-smi'"
+  },
+  "chart_struct_abi_selftest": {
+    "ZINI": 2665.0,
+    "ZFIN": 7826.0,
+    "Nbinx": 60.0,
+    "Nbiny": 50.0,
+    "PMIN": 1500.0,
+    "DEGX2": 9.0,
+    "ok": true
+  },
+  "population": {
+    "n_tracks": 1000000,
+    "source": "/data/bfys/gscriven/TrackExtrapolation/experiments/gen_3/data/train_10M_gen4.npz",
+    "source_n": 9188440,
+    "seed": 20260614,
+    "dz_abs_mm": {
+      "p1": 26.68629264831543,
+      "p25": 103.4636459350586,
+      "median": 445.9209899902344,
+      "p75": 1736.751953125,
+      "p99": 8527.474609375
+    },
+    "p_GeV": {
+      "p1": 1.0964738130569458,
+      "median": 17.16303062438965,
+      "p99": 190.39402770996094
+    },
+    "rk_steps_at_100mm": {
+      "mean": 13.792181015014648,
+      "median": 5.0,
+      "p99": 86.0,
+      "max": 100.0
+    },
+    "rk_field_lookups_per_track_mean": 82.75308227539062,
+    "frac_full_UTT_like_dz_gt_3000": 0.150182
+  },
+  "footprints_bytes": {
+    "field_map_texture": 11494872,
+    "extraputt_chart": 960092,
+    "pinn_v2_weights": 41528,
+    "analytic_chart_kernel": null
+  },
+  "field": {
+    "path": "/cvmfs/lhcb.cern.ch/lib/lhcb/DBASE/FieldMap/v8r1/cdf/field.v8r1.down.bin",
+    "sha16": "41145f1c753629e6",
+    "N": [
+      81,
+      81,
+      146
+    ],
+    "voxel_mm": [
+      100.0,
+      100.0,
+      100.0
+    ],
+    "min_mm": [
+      -4000.0,
+      -4000.0,
+      -500.0
+    ],
+    "texture_footprint_bytes": 11494872,
+    "texture_footprint_MB": 11.495,
+    "note": "raw Gaudi-unit values (the implicit 1e-3*qop scale); loaded verbatim, as production."
+  },
+  "methods": {
+    "rk_field": {
+      "kernel_only_ms": {
+        "min": 5.616640090942383,
+        "p25": 5.690880179405212,
+        "median": 5.725696086883545,
+        "p75": 5.779455900192261,
+        "max": 5.903359889984131,
+        "iqr": 0.08857572078704834,
+        "rel_iqr": 0.015469860684704882,
+        "rel_range": 0.05007597236929275,
+        "cv": 0.011574906922083959
+      },
+      "end_to_end_ms": {
+        "min": 8.31446361541748,
+        "p25": 8.403607845306396,
+        "median": 8.517663955688477,
+        "p75": 8.728647947311401,
+        "max": 10.72873592376709,
+        "iqr": 0.3250401020050049,
+        "rel_iqr": 0.0381607097551587,
+        "rel_range": 0.28344300983337695,
+        "cv": 0.06042684296524935
+      },
+      "single_warp_us": {
+        "min": 10.239999741315842,
+        "p25": 11.264000087976456,
+        "median": 11.264000087976456,
+        "p75": 11.264000087976456,
+        "max": 13.311999849975109,
+        "iqr": 0.0,
+        "rel_iqr": 0.0,
+        "rel_range": 272.72728024375783,
+        "cv": 50.54152729449177
+      },
+      "us_per_track": 0.005725696086883545,
+      "tracks_per_s": 174651253.72106376,
+      "us_per_track_end_to_end": 0.008517663955688476,
+      "tracks_per_s_end_to_end": 117403082.01900303,
+      "validity": {
+        "finite_frac_x": 1.0,
+        "moved_frac_x": 1.0
+      }
+    },
+    "extraputt": {
+      "kernel_only_ms": {
+        "min": 2.3306241035461426,
+        "p25": 2.355456054210663,
+        "median": 2.3633921146392822,
+        "p75": 2.373375952243805,
+        "max": 2.4002559185028076,
+        "iqr": 0.01791989803314209,
+        "rel_iqr": 0.0075822788449461985,
+        "rel_range": 0.029462658576777365,
+        "cv": 0.006188044025097142
+      },
+      "end_to_end_ms": {
+        "min": 4.979008197784424,
+        "p25": 5.006935954093933,
+        "median": 5.0202720165252686,
+        "p75": 5.035096049308777,
+        "max": 5.486911773681641,
+        "iqr": 0.02816009521484375,
+        "rel_iqr": 0.005609276772682624,
+        "rel_range": 0.10117052905208057,
+        "cv": 0.026107437248316333
+      },
+      "single_warp_us": {
+        "min": 23.552000522613525,
+        "p25": 23.80800060927868,
+        "median": 24.57600086927414,
+        "p75": 24.57600086927414,
+        "max": 26.623999699950218,
+        "iqr": 0.7680002599954605,
+        "rel_iqr": 31.250009473902807,
+        "rel_range": 124.99996210438877,
+        "cv": 22.708158809436576
+      },
+      "us_per_track": 0.002363392114639282,
+      "tracks_per_s": 423120646.7203717,
+      "us_per_track_end_to_end": 0.005020272016525268,
+      "tracks_per_s_end_to_end": 199192393.70063856,
+      "validity": {
+        "finite_frac_x": 1.0,
+        "moved_frac_x": 1.0
+      }
+    },
+    "pinn_v2_utt": {
+      "kernel_only_ms": {
+        "min": 7.018496036529541,
+        "p25": 7.028736114501953,
+        "median": 7.033856153488159,
+        "p75": 7.03872013092041,
+        "max": 7.054336071014404,
+        "iqr": 0.009984016418457031,
+        "rel_iqr": 0.001419422888468633,
+        "rel_range": 0.005095360738517499,
+        "cv": 0.0012386529983423077
+      },
+      "end_to_end_ms": {
+        "min": 9.671775817871094,
+        "p25": 9.69491195678711,
+        "median": 9.780751705169678,
+        "p75": 9.885343790054321,
+        "max": 11.898528099060059,
+        "iqr": 0.19043183326721191,
+        "rel_iqr": 0.01947006109628138,
+        "rel_range": 0.2276667835266691,
+        "cv": 0.04144180589542738
+      },
+      "single_warp_us": {
+        "min": 176.12800002098083,
+        "p25": 176.12800002098083,
+        "median": 176.12800002098083,
+        "p75": 177.15199291706085,
+        "max": 178.17600071430206,
+        "iqr": 1.023992896080017,
+        "rel_iqr": 5.8139131538315105,
+        "rel_range": 11.627910911821317,
+        "cv": 3.0454429350253043
+      },
+      "us_per_track": 0.0070338561534881595,
+      "tracks_per_s": 142169526.6691074,
+      "us_per_track_end_to_end": 0.009780751705169679,
+      "tracks_per_s_end_to_end": 102241630.31062773,
+      "validity": {
+        "finite_frac_x": 1.0,
+        "moved_frac_x": 1.0
+      }
+    }
+  },
+  "speedup_ratios_kernel_only": {
+    "RK_div_NN": 0.814019502523394,
+    "extrapUTT_div_NN": 0.3360023382717675,
+    "RK_div_chart": null,
+    "RK_div_extrapUTT": 2.4226602312064673
+  }
+}

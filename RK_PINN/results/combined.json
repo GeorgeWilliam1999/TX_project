@@ -1,0 +1,853 @@
+{
+ "v1": {
+  "tier": 1,
+  "variant_set": "fp32_inkernel_v1",
+  "n_tracks": 1000000,
+  "block_size": 256,
+  "warmup_iters": 200,
+  "timed_repeats": 50,
+  "macs_per_track": 10176,
+  "dtype": "fp32",
+  "published_baselines_ns_per_track": {
+   "extrapUTT": 2.344,
+   "rk_field": 5.709,
+   "pinn_v2_baseline": 7.054
+  },
+  "toolchain": {
+   "compiler": "NVRTC",
+   "cupy": "14.1.1",
+   "cc": "70",
+   "nvrtc_options": [
+    "--std=c++20",
+    "-I/data/bfys/gscriven/track-extrapolation-pinn/allen_bridge/bench/shims",
+    "-I/data/bfys/gscriven/track-extrapolation-pinn/candidate/pinn_v2_ALLEN_v1",
+    "-I/data/bfys/gscriven/pinn_opt_work"
+   ],
+   "compile_seconds": 0.88
+  },
+  "gpu": {
+   "nvidia_smi_error": "[Errno 2] No such file or directory: 'nvidia-smi'"
+  },
+  "device_props": {
+   "sm_count": 80,
+   "clock_ghz": 1.38,
+   "fp32_peak_tflop": 14.1312
+  },
+  "methods": {
+   "pinn_ref": {
+    "kernel_only_ms": {
+     "min": 7.0062079429626465,
+     "p25": 7.028736114501953,
+     "median": 7.03385591506958,
+     "p75": 7.043840050697327,
+     "max": 7.098368167877197,
+     "iqr": 0.015103936195373535,
+     "rel_iqr": 0.002147319532521889
+    },
+    "single_warp_us": {
+     "min": 177.15199291706085,
+     "p25": 178.17600071430206,
+     "median": 178.17600071430206,
+     "p75": 178.17600071430206,
+     "max": 193.53599846363068,
+     "iqr": 0.0,
+     "rel_iqr": 0.0
+    },
+    "single_warp_tracks": 32,
+    "ns_per_track": 7.03385591506958,
+    "tracks_per_s": 142169531.48806542,
+    "pct_fp32_peak": 20.47550317627029,
+    "accuracy_vs_ref": {
+     "max_abs_err": 0.0,
+     "max_rel_err": 0.0,
+     "finite": true
+    },
+    "resources": {
+     "num_regs": 124,
+     "local_size_bytes": 384,
+     "shared_size_bytes": 0,
+     "const_size_bytes": 0,
+     "max_threads_per_block": 512,
+     "theoretical_occupancy": 0.25
+    }
+   },
+   "pinn_fused": {
+    "kernel_only_ms": {
+     "min": 4.791296005249023,
+     "p25": 4.794367790222168,
+     "median": 4.795392036437988,
+     "p75": 4.798463821411133,
+     "max": 4.811776161193848,
+     "iqr": 0.004096031188964844,
+     "rel_iqr": 0.0008541598179754602
+    },
+    "single_warp_us": {
+     "min": 227.32800245285034,
+     "p25": 227.32800245285034,
+     "median": 227.32800245285034,
+     "p75": 228.35199534893036,
+     "max": 229.37600314617157,
+     "iqr": 1.023992896080017,
+     "rel_iqr": 4.5044732062536
+    },
+    "single_warp_tracks": 32,
+    "ns_per_track": 4.795392036437988,
+    "tracks_per_s": 208533523.93327966,
+    "pct_fp32_peak": 30.033360783869085,
+    "accuracy_vs_ref": {
+     "max_abs_err": 0.00048828125,
+     "max_rel_err": 0.002217742847278714,
+     "finite": true
+    },
+    "resources": {
+     "num_regs": 128,
+     "local_size_bytes": 0,
+     "shared_size_bytes": 0,
+     "const_size_bytes": 0,
+     "max_threads_per_block": 512,
+     "theoretical_occupancy": 0.25
+    }
+   },
+   "pinn_warp": {
+    "kernel_only_ms": {
+     "min": 8.311807632446289,
+     "p25": 8.31488037109375,
+     "median": 8.316927909851074,
+     "p75": 8.319999694824219,
+     "max": 8.366080284118652,
+     "iqr": 0.00511932373046875,
+     "rel_iqr": 0.0006155306124999728
+    },
+    "single_warp_us": {
+     "min": 17.40800030529499,
+     "p25": 18.432000651955605,
+     "median": 18.432000651955605,
+     "p75": 19.45599913597107,
+     "max": 20.479999482631683,
+     "iqr": 1.0239984840154648,
+     "rel_iqr": 55.55547134308615
+    },
+    "single_warp_tracks": 1,
+    "ns_per_track": 8.316927909851074,
+    "tracks_per_s": 120236704.0858367,
+    "pct_fp32_peak": 17.316699229753652,
+    "accuracy_vs_ref": {
+     "max_abs_err": 0.00048828125,
+     "max_rel_err": 0.002217742847278714,
+     "finite": true
+    },
+    "resources": {
+     "num_regs": 40,
+     "local_size_bytes": 0,
+     "shared_size_bytes": 0,
+     "const_size_bytes": 0,
+     "max_threads_per_block": 1024,
+     "theoretical_occupancy": 0.75
+    }
+   },
+   "pinn_warp_u4": {
+    "kernel_only_ms": {
+     "min": 8.343551635742188,
+     "p25": 8.351743698120117,
+     "median": 8.354816436767578,
+     "p75": 8.357888221740723,
+     "max": 8.460288047790527,
+     "iqr": 0.006144523620605469,
+     "rel_iqr": 0.0007354468727242011
+    },
+    "single_warp_us": {
+     "min": 27.648000046610832,
+     "p25": 28.672000393271446,
+     "median": 28.672000393271446,
+     "p75": 28.672000393271446,
+     "max": 30.719999223947525,
+     "iqr": 0.0,
+     "rel_iqr": 0.0
+    },
+    "single_warp_tracks": 1,
+    "ns_per_track": 8.354816436767578,
+    "tracks_per_s": 119691438.77287784,
+    "pct_fp32_peak": 17.23816917109382,
+    "accuracy_vs_ref": {
+     "max_abs_err": 0.00048828125,
+     "max_rel_err": 0.002217742847278714,
+     "finite": true
+    },
+    "resources": {
+     "num_regs": 34,
+     "local_size_bytes": 0,
+     "shared_size_bytes": 0,
+     "const_size_bytes": 0,
+     "max_threads_per_block": 1024,
+     "theoretical_occupancy": 0.75
+    }
+   }
+  },
+  "summary_vs_ref": {
+   "pinn_ref": {
+    "ns_per_track": 7.03385591506958,
+    "speedup_vs_ref": 1.0
+   },
+   "pinn_fused": {
+    "ns_per_track": 4.795392036437988,
+    "speedup_vs_ref": 1.466794760808403
+   },
+   "pinn_warp": {
+    "ns_per_track": 8.316927909851074,
+    "speedup_vs_ref": 0.8457276522426332
+   },
+   "pinn_warp_u4": {
+    "ns_per_track": 8.354816436767578,
+    "speedup_vs_ref": 0.8418923345957953
+   }
+  }
+ },
+ "v2": {
+  "tier": 1,
+  "variant_set": "v2",
+  "n_tracks": 1000000,
+  "block_size": 256,
+  "warmup_iters": 200,
+  "timed_repeats": 50,
+  "published_baselines_ns_per_track": {
+   "extrapUTT": 2.344,
+   "rk_field": 5.709,
+   "pinn_v2_baseline": 7.054
+  },
+  "physics_floor_um": {
+   "h96_deployed": 3580.8,
+   "h64": 2788.6,
+   "h384": 3782.3,
+   "source": "results/wave2/wave2_three_arm.json (median_dx_um)"
+  },
+  "toolchain": {
+   "compiler": "NVRTC",
+   "cupy": "14.1.1",
+   "cc": "70",
+   "nvrtc_options": [
+    "--std=c++20",
+    "-I/data/bfys/gscriven/track-extrapolation-pinn/allen_bridge/bench/shims",
+    "-I/data/bfys/gscriven/track-extrapolation-pinn/candidate/pinn_v2_ALLEN_v1",
+    "-I/data/bfys/gscriven/pinn_opt_work"
+   ]
+  },
+  "gpu": {
+   "nvidia_smi_error": "[Errno 2] No such file or directory: 'nvidia-smi'"
+  },
+  "device_props": {
+   "sm": 80,
+   "clock_ghz": 1.38,
+   "fp32_peak_tflop": 14.1312,
+   "mem_bw_GBs": 898.048
+  },
+  "methods": {
+   "pinn_ref": {
+    "ns_per_track": 7.038976192474365,
+    "kernel_only_ms": {
+     "median": 7.038976192474365,
+     "p25": 7.027711868286133,
+     "p75": 7.046144008636475,
+     "min": 7.007232189178467,
+     "max": 7.128064155578613,
+     "rel_iqr": 0.0026185825674546665
+    },
+    "single_warp_us": 178.17600071430206,
+    "pct_fp32_peak": 20.460608928385614,
+    "macs_per_track": 10176,
+    "accuracy_vs_ref": {
+     "finite": true,
+     "max_pos_delta_um": 0.0,
+     "median_pos_delta_um": 0.0,
+     "max_slope_delta_rad": 0.0,
+     "max_rel_err": 0.0,
+     "bit_exact": true
+    },
+    "resources": {
+     "num_regs": 124,
+     "local_size_bytes": 384,
+     "shared_size_bytes": 0,
+     "max_threads_per_block": 512,
+     "theoretical_occupancy": 0.25
+    }
+   },
+   "pinn_fused": {
+    "ns_per_track": 4.844032049179077,
+    "kernel_only_ms": {
+     "median": 4.844032049179077,
+     "p25": 4.841472148895264,
+     "p75": 4.849152207374573,
+     "min": 4.837376117706299,
+     "max": 4.882431983947754,
+     "rel_iqr": 0.001585468139214857
+    },
+    "single_warp_us": 237.56800591945648,
+    "pct_fp32_peak": 29.73178906915826,
+    "macs_per_track": 10176,
+    "accuracy_vs_ref": {
+     "finite": true,
+     "max_pos_delta_um": 0.0,
+     "median_pos_delta_um": 0.0,
+     "max_slope_delta_rad": 0.0,
+     "max_rel_err": 0.0,
+     "bit_exact": true
+    },
+    "resources": {
+     "num_regs": 128,
+     "local_size_bytes": 0,
+     "shared_size_bytes": 0,
+     "max_threads_per_block": 512,
+     "theoretical_occupancy": 0.25
+    }
+   },
+   "pinn_fused_ftanh": {
+    "ns_per_track": 4.932608127593994,
+    "kernel_only_ms": {
+     "median": 4.932608127593994,
+     "p25": 4.931583881378174,
+     "p75": 4.934656143188477,
+     "min": 4.928512096405029,
+     "max": 4.993023872375488,
+     "rel_iqr": 0.0006228473316410214
+    },
+    "single_warp_us": 207.87200331687927,
+    "pct_fp32_peak": 29.19788789317125,
+    "macs_per_track": 10176,
+    "accuracy_vs_ref": {
+     "finite": true,
+     "max_pos_delta_um": 0.48828125,
+     "median_pos_delta_um": 0.0,
+     "max_slope_delta_rad": 5.960464477539063e-08,
+     "max_rel_err": 0.007264824118465185,
+     "bit_exact": false
+    },
+    "resources": {
+     "num_regs": 127,
+     "local_size_bytes": 0,
+     "shared_size_bytes": 0,
+     "max_threads_per_block": 512,
+     "theoretical_occupancy": 0.25
+    }
+   },
+   "pinn_fused_h16": {
+    "ns_per_track": 4.871680021286011,
+    "kernel_only_ms": {
+     "median": 4.871680021286011,
+     "p25": 4.870143890380859,
+     "p75": 4.873216152191162,
+     "min": 4.867072105407715,
+     "max": 4.911104202270508,
+     "rel_iqr": 0.000630637028064033
+    },
+    "single_warp_us": 237.56800591945648,
+    "pct_fp32_peak": 29.563053915929473,
+    "macs_per_track": 10176,
+    "accuracy_vs_ref": {
+     "finite": true,
+     "max_pos_delta_um": 58.7158203125,
+     "median_pos_delta_um": 0.232696533203125,
+     "max_slope_delta_rad": 4.470348358154297e-06,
+     "max_rel_err": 4.875949859619141,
+     "bit_exact": false
+    },
+    "resources": {
+     "num_regs": 127,
+     "local_size_bytes": 0,
+     "shared_size_bytes": 0,
+     "max_threads_per_block": 512,
+     "theoretical_occupancy": 0.25
+    }
+   },
+   "pinn_fused_lb": {
+    "ns_per_track": 7.321088075637817,
+    "kernel_only_ms": {
+     "median": 7.321088075637817,
+     "p25": 7.303423881530762,
+     "p75": 7.336447834968567,
+     "min": 7.245823860168457,
+     "max": 7.369728088378906,
+     "rel_iqr": 0.004510798544781625
+    },
+    "single_warp_us": 209.9200040102005,
+    "pct_fp32_peak": 19.672176818865484,
+    "macs_per_track": 10176,
+    "accuracy_vs_ref": {
+     "finite": true,
+     "max_pos_delta_um": 0.0,
+     "median_pos_delta_um": 0.0,
+     "max_slope_delta_rad": 0.0,
+     "max_rel_err": 0.0,
+     "bit_exact": true
+    },
+    "resources": {
+     "num_regs": 80,
+     "local_size_bytes": 224,
+     "shared_size_bytes": 0,
+     "max_threads_per_block": 256,
+     "theoretical_occupancy": 0.375
+    }
+   },
+   "pinn_h64": {
+    "ns_per_track": 2.269184112548828,
+    "kernel_only_ms": {
+     "median": 2.269184112548828,
+     "p25": 2.268160104751587,
+     "p75": 2.2712318897247314,
+     "min": 2.2671360969543457,
+     "max": 2.3541760444641113,
+     "rel_iqr": 0.0013536957870263747
+    },
+    "single_warp_us": 97.28000313043594,
+    "pct_fp32_peak": 29.538804337897925,
+    "macs_per_track": 4736,
+    "accuracy_vs_ref": {
+     "finite": true,
+     "max_pos_delta_um": 57381.103515625,
+     "median_pos_delta_um": 1193.9163208007812,
+     "max_slope_delta_rad": 0.0077880024909973145,
+     "max_rel_err": 32723.744140625,
+     "bit_exact": false
+    },
+    "resources": {
+     "num_regs": 95,
+     "local_size_bytes": 0,
+     "shared_size_bytes": 0,
+     "max_threads_per_block": 640,
+     "theoretical_occupancy": 0.25
+    }
+   }
+  },
+  "speedup_vs_ref": {
+   "pinn_ref": 1.0,
+   "pinn_fused": 1.453123373464729,
+   "pinn_fused_ftanh": 1.4270292734379055,
+   "pinn_fused_h16": 1.44487654396814,
+   "pinn_fused_lb": 0.9614658531288227,
+   "pinn_h64": 3.101985490532955
+  },
+  "pinn_fused_block_sweep_ns": {
+   "64": 4.818943977355957,
+   "128": 4.841472148895264,
+   "192": 4.718592166900635,
+   "256": 4.843520164489746,
+   "384": 4.853759765625,
+   "512": 4.9244160652160645
+  },
+  "gemm_ceiling": {
+   "fp32": {
+    "ns_per_track": 7.730175971984863,
+    "kernel_only_ms": {
+     "median": 7.730175971984863,
+     "p25": 7.725056171417236,
+     "p75": 7.734016060829163,
+     "min": 7.705599784851074,
+     "max": 7.7608962059021,
+     "rel_iqr": 0.0011590796179023664
+    },
+    "hbm_traffic_floor_ns_per_track": 1.754917331812999,
+    "note": "3 separate cuBLAS GEMMs; intermediate activations streamed through HBM"
+   },
+   "fp16": {
+    "ns_per_track": 6.172671794891357,
+    "kernel_only_ms": {
+     "median": 6.172671794891357,
+     "p25": 6.1675519943237305,
+     "p75": 6.17574405670166,
+     "min": 6.160384178161621,
+     "max": 6.201344013214111,
+     "rel_iqr": 0.0013271501628694439
+    },
+    "hbm_traffic_floor_ns_per_track": 0.8774586659064995,
+    "note": "3 separate cuBLAS GEMMs; intermediate activations streamed through HBM"
+   }
+  }
+ },
+ "v3": {
+  "tier": 1,
+  "variant_set": "v3_fullunroll_ilp",
+  "n_tracks": 1000000,
+  "block_size": 256,
+  "warmup_iters": 200,
+  "timed_repeats": 50,
+  "published_baselines_ns_per_track": {
+   "extrapUTT": 2.344,
+   "rk_field": 5.709,
+   "pinn_v2_baseline": 7.054
+  },
+  "device_props": {
+   "sm": 80,
+   "clock_ghz": 1.38,
+   "fp32_peak_tflop": 14.1312
+  },
+  "methods": {
+   "pinn_ref": {
+    "ns_per_track": 7.0307841300964355,
+    "single_warp_us": 179.19999361038208,
+    "macs_per_track": 10176,
+    "pct_fp32_peak": 20.48444902666345,
+    "resources": {
+     "num_regs": 124,
+     "local_size_bytes": 384,
+     "shared_size_bytes": 0,
+     "occ": 0.25
+    },
+    "accuracy_vs_ref": {
+     "finite": true,
+     "max_pos_delta_um": 0.0,
+     "max_slope_delta_rad": 0.0,
+     "bit_exact": true
+    }
+   },
+   "pinn_fused": {
+    "ns_per_track": 4.8455681800842285,
+    "single_warp_us": 236.54399812221527,
+    "macs_per_track": 10176,
+    "pct_fp32_peak": 29.72236356561416,
+    "resources": {
+     "num_regs": 128,
+     "local_size_bytes": 0,
+     "shared_size_bytes": 0,
+     "occ": 0.25
+    },
+    "accuracy_vs_ref": {
+     "finite": true,
+     "max_pos_delta_um": 0.0,
+     "max_slope_delta_rad": 0.0,
+     "bit_exact": true
+    }
+   },
+   "pinn_fused_fu": {
+    "ns_per_track": 5.08569598197937,
+    "single_warp_us": 215.03999829292297,
+    "macs_per_track": 10176,
+    "pct_fp32_peak": 28.31898321110044,
+    "resources": {
+     "num_regs": 128,
+     "local_size_bytes": 0,
+     "shared_size_bytes": 0,
+     "occ": 0.25
+    },
+    "accuracy_vs_ref": {
+     "finite": true,
+     "max_pos_delta_um": 0.0,
+     "max_slope_delta_rad": 0.0,
+     "bit_exact": true
+    }
+   },
+   "pinn_fused_ilp4": {
+    "ns_per_track": 4.816895961761475,
+    "single_warp_us": 220.15999257564545,
+    "macs_per_track": 10176,
+    "pct_fp32_peak": 29.899283744913586,
+    "resources": {
+     "num_regs": 128,
+     "local_size_bytes": 0,
+     "shared_size_bytes": 0,
+     "occ": 0.25
+    },
+    "accuracy_vs_ref": {
+     "finite": true,
+     "max_pos_delta_um": 0.48828125,
+     "max_slope_delta_rad": 5.960464477539063e-08,
+     "bit_exact": false
+    }
+   },
+   "pinn_h64": {
+    "ns_per_track": 2.2702078819274902,
+    "single_warp_us": 98.30400347709656,
+    "macs_per_track": 4736,
+    "pct_fp32_peak": 29.52548356511576,
+    "resources": {
+     "num_regs": 95,
+     "local_size_bytes": 0,
+     "shared_size_bytes": 0,
+     "occ": 0.25
+    },
+    "accuracy_vs_ref": {
+     "finite": true,
+     "max_pos_delta_um": 57381.103515625,
+     "max_slope_delta_rad": 0.0077880024909973145,
+     "bit_exact": false
+    }
+   },
+   "pinn_h64_fu": {
+    "ns_per_track": 0.9077759981155396,
+    "single_warp_us": 27.648000046610832,
+    "macs_per_track": 4736,
+    "pct_fp32_peak": 73.83868448426975,
+    "resources": {
+     "num_regs": 96,
+     "local_size_bytes": 0,
+     "shared_size_bytes": 0,
+     "occ": 0.25
+    },
+    "accuracy_vs_ref": {
+     "finite": true,
+     "max_pos_delta_um": 57381.103515625,
+     "max_slope_delta_rad": 0.0077880024909973145,
+     "bit_exact": false
+    }
+   }
+  },
+  "speedup_vs_ref": {
+   "pinn_ref": 1.0,
+   "pinn_fused": 1.4509720777418145,
+   "pinn_fused_fu": 1.382462529221031,
+   "pinn_fused_ilp4": 1.4596088821327524,
+   "pinn_h64": 3.0969781164388523,
+   "pinn_h64_fu": 7.745065021207549
+  },
+  "block_sweep_ns": {
+   "pinn_fused_fu": {
+    "64": 5.494271993637085,
+    "96": 5.577215909957886,
+    "128": 5.34169602394104,
+    "192": 5.273600101470947,
+    "256": 5.084671974182129,
+    "384": 5.0278401374816895
+   },
+   "pinn_h64_fu": {
+    "64": 1.0936319828033447,
+    "96": 1.129472017288208,
+    "128": 1.0516480207443237,
+    "192": 1.1233279705047607,
+    "256": 0.9093120098114014,
+    "384": 0.9687039852142334
+   }
+  }
+ },
+ "baselines": {
+  "tier": 1,
+  "description": "Isolated CUDA micro-bench: RK+field vs extrapUTT vs PINN_V2_UTT over the same gen-4 population. NVRTC-compiled verbatim Allen device code.",
+  "n_tracks": 1000000,
+  "block_size": 256,
+  "warmup_iters": 200,
+  "timed_repeats": 50,
+  "dtype": "fp32 (KalmanFloat=float, KALMAN_DOUBLE_PRECISION=OFF)",
+  "timing": "CUDA events (cudaEventElapsedTime), device-synchronised per repeat",
+  "unit": "one track, one extrapolation across its given dz (state->state)",
+  "rk_step_dz_mm": 100.0,
+  "rk_stages_cashkarp": 6,
+  "toolchain": {
+   "compiler": "NVRTC",
+   "nvrtc_version": [
+    12,
+    8
+   ],
+   "cupy_version": "14.1.1",
+   "target_compute_capability": "70",
+   "nvrtc_options": [
+    "--std=c++20",
+    "-DMAGFIELD_USE_TEXTURE",
+    "-I/data/bfys/gscriven/track-extrapolation-pinn/allen_bridge/bench/shims",
+    "-I/data/bfys/gscriven/track-extrapolation-pinn/allen_bridge/bench",
+    "-I/data/bfys/gscriven/Allen/device/kalman/ParKalman/include",
+    "-I/data/bfys/gscriven/Allen/device/event_model/common/include"
+   ],
+   "compile_seconds": 1.817,
+   "note": "production Allen GPU build uses nvcc -O3 -arch=sm_70/80 with the SAME verbatim device code; NVRTC targets sm_70 here."
+  },
+  "gpu": {
+   "nvidia_smi_error": "[Errno 2] No such file or directory: 'nvidia-smi'"
+  },
+  "chart_struct_abi_selftest": {
+   "ZINI": 2665.0,
+   "ZFIN": 7826.0,
+   "Nbinx": 60.0,
+   "Nbiny": 50.0,
+   "PMIN": 1500.0,
+   "DEGX2": 9.0,
+   "ok": true
+  },
+  "population": {
+   "n_tracks": 1000000,
+   "source": "/data/bfys/gscriven/TrackExtrapolation/experiments/gen_3/data/train_10M_gen4.npz",
+   "source_n": 9188440,
+   "seed": 20260614,
+   "dz_abs_mm": {
+    "p1": 26.68629264831543,
+    "p25": 103.4636459350586,
+    "median": 445.9209899902344,
+    "p75": 1736.751953125,
+    "p99": 8527.474609375
+   },
+   "p_GeV": {
+    "p1": 1.0964738130569458,
+    "median": 17.16303062438965,
+    "p99": 190.39402770996094
+   },
+   "rk_steps_at_100mm": {
+    "mean": 13.792181015014648,
+    "median": 5.0,
+    "p99": 86.0,
+    "max": 100.0
+   },
+   "rk_field_lookups_per_track_mean": 82.75308227539062,
+   "frac_full_UTT_like_dz_gt_3000": 0.150182
+  },
+  "footprints_bytes": {
+   "field_map_texture": 11494872,
+   "extraputt_chart": 960092,
+   "pinn_v2_weights": 41528,
+   "analytic_chart_kernel": null
+  },
+  "field": {
+   "path": "/cvmfs/lhcb.cern.ch/lib/lhcb/DBASE/FieldMap/v8r1/cdf/field.v8r1.down.bin",
+   "sha16": "41145f1c753629e6",
+   "N": [
+    81,
+    81,
+    146
+   ],
+   "voxel_mm": [
+    100.0,
+    100.0,
+    100.0
+   ],
+   "min_mm": [
+    -4000.0,
+    -4000.0,
+    -500.0
+   ],
+   "texture_footprint_bytes": 11494872,
+   "texture_footprint_MB": 11.495,
+   "note": "raw Gaudi-unit values (the implicit 1e-3*qop scale); loaded verbatim, as production."
+  },
+  "methods": {
+   "rk_field": {
+    "kernel_only_ms": {
+     "min": 5.616640090942383,
+     "p25": 5.690880179405212,
+     "median": 5.725696086883545,
+     "p75": 5.779455900192261,
+     "max": 5.903359889984131,
+     "iqr": 0.08857572078704834,
+     "rel_iqr": 0.015469860684704882,
+     "rel_range": 0.05007597236929275,
+     "cv": 0.011574906922083959
+    },
+    "end_to_end_ms": {
+     "min": 8.31446361541748,
+     "p25": 8.403607845306396,
+     "median": 8.517663955688477,
+     "p75": 8.728647947311401,
+     "max": 10.72873592376709,
+     "iqr": 0.3250401020050049,
+     "rel_iqr": 0.0381607097551587,
+     "rel_range": 0.28344300983337695,
+     "cv": 0.06042684296524935
+    },
+    "single_warp_us": {
+     "min": 10.239999741315842,
+     "p25": 11.264000087976456,
+     "median": 11.264000087976456,
+     "p75": 11.264000087976456,
+     "max": 13.311999849975109,
+     "iqr": 0.0,
+     "rel_iqr": 0.0,
+     "rel_range": 272.72728024375783,
+     "cv": 50.54152729449177
+    },
+    "us_per_track": 0.005725696086883545,
+    "tracks_per_s": 174651253.72106376,
+    "us_per_track_end_to_end": 0.008517663955688476,
+    "tracks_per_s_end_to_end": 117403082.01900303,
+    "validity": {
+     "finite_frac_x": 1.0,
+     "moved_frac_x": 1.0
+    }
+   },
+   "extraputt": {
+    "kernel_only_ms": {
+     "min": 2.3306241035461426,
+     "p25": 2.355456054210663,
+     "median": 2.3633921146392822,
+     "p75": 2.373375952243805,
+     "max": 2.4002559185028076,
+     "iqr": 0.01791989803314209,
+     "rel_iqr": 0.0075822788449461985,
+     "rel_range": 0.029462658576777365,
+     "cv": 0.006188044025097142
+    },
+    "end_to_end_ms": {
+     "min": 4.979008197784424,
+     "p25": 5.006935954093933,
+     "median": 5.0202720165252686,
+     "p75": 5.035096049308777,
+     "max": 5.486911773681641,
+     "iqr": 0.02816009521484375,
+     "rel_iqr": 0.005609276772682624,
+     "rel_range": 0.10117052905208057,
+     "cv": 0.026107437248316333
+    },
+    "single_warp_us": {
+     "min": 23.552000522613525,
+     "p25": 23.80800060927868,
+     "median": 24.57600086927414,
+     "p75": 24.57600086927414,
+     "max": 26.623999699950218,
+     "iqr": 0.7680002599954605,
+     "rel_iqr": 31.250009473902807,
+     "rel_range": 124.99996210438877,
+     "cv": 22.708158809436576
+    },
+    "us_per_track": 0.002363392114639282,
+    "tracks_per_s": 423120646.7203717,
+    "us_per_track_end_to_end": 0.005020272016525268,
+    "tracks_per_s_end_to_end": 199192393.70063856,
+    "validity": {
+     "finite_frac_x": 1.0,
+     "moved_frac_x": 1.0
+    }
+   },
+   "pinn_v2_utt": {
+    "kernel_only_ms": {
+     "min": 7.018496036529541,
+     "p25": 7.028736114501953,
+     "median": 7.033856153488159,
+     "p75": 7.03872013092041,
+     "max": 7.054336071014404,
+     "iqr": 0.009984016418457031,
+     "rel_iqr": 0.001419422888468633,
+     "rel_range": 0.005095360738517499,
+     "cv": 0.0012386529983423077
+    },
+    "end_to_end_ms": {
+     "min": 9.671775817871094,
+     "p25": 9.69491195678711,
+     "median": 9.780751705169678,
+     "p75": 9.885343790054321,
+     "max": 11.898528099060059,
+     "iqr": 0.19043183326721191,
+     "rel_iqr": 0.01947006109628138,
+     "rel_range": 0.2276667835266691,
+     "cv": 0.04144180589542738
+    },
+    "single_warp_us": {
+     "min": 176.12800002098083,
+     "p25": 176.12800002098083,
+     "median": 176.12800002098083,
+     "p75": 177.15199291706085,
+     "max": 178.17600071430206,
+     "iqr": 1.023992896080017,
+     "rel_iqr": 5.8139131538315105,
+     "rel_range": 11.627910911821317,
+     "cv": 3.0454429350253043
+    },
+    "us_per_track": 0.0070338561534881595,
+    "tracks_per_s": 142169526.6691074,
+    "us_per_track_end_to_end": 0.009780751705169679,
+    "tracks_per_s_end_to_end": 102241630.31062773,
+    "validity": {
+     "finite_frac_x": 1.0,
+     "moved_frac_x": 1.0
+    }
+   }
+  },
+  "speedup_ratios_kernel_only": {
+   "RK_div_NN": 0.814019502523394,
+   "extrapUTT_div_NN": 0.3360023382717675,
+   "RK_div_chart": null,
+   "RK_div_extrapUTT": 2.4226602312064673
+  }
+ }
+}

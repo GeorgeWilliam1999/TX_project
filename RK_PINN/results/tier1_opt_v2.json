@@ -1,0 +1,259 @@
+{
+  "tier": 1,
+  "variant_set": "v2",
+  "n_tracks": 1000000,
+  "block_size": 256,
+  "warmup_iters": 200,
+  "timed_repeats": 50,
+  "published_baselines_ns_per_track": {
+    "extrapUTT": 2.344,
+    "rk_field": 5.709,
+    "pinn_v2_baseline": 7.054
+  },
+  "physics_floor_um": {
+    "h96_deployed": 3580.8,
+    "h64": 2788.6,
+    "h384": 3782.3,
+    "source": "results/wave2/wave2_three_arm.json (median_dx_um)"
+  },
+  "toolchain": {
+    "compiler": "NVRTC",
+    "cupy": "14.1.1",
+    "cc": "70",
+    "nvrtc_options": [
+      "--std=c++20",
+      "-I/data/bfys/gscriven/track-extrapolation-pinn/allen_bridge/bench/shims",
+      "-I/data/bfys/gscriven/track-extrapolation-pinn/candidate/pinn_v2_ALLEN_v1",
+      "-I/data/bfys/gscriven/pinn_opt_work"
+    ]
+  },
+  "gpu": {
+    "nvidia_smi_error": "[Errno 2] No such file or directory: 'nvidia-smi'"
+  },
+  "device_props": {
+    "sm": 80,
+    "clock_ghz": 1.38,
+    "fp32_peak_tflop": 14.1312,
+    "mem_bw_GBs": 898.048
+  },
+  "methods": {
+    "pinn_ref": {
+      "ns_per_track": 7.038976192474365,
+      "kernel_only_ms": {
+        "median": 7.038976192474365,
+        "p25": 7.027711868286133,
+        "p75": 7.046144008636475,
+        "min": 7.007232189178467,
+        "max": 7.128064155578613,
+        "rel_iqr": 0.0026185825674546665
+      },
+      "single_warp_us": 178.17600071430206,
+      "pct_fp32_peak": 20.460608928385614,
+      "macs_per_track": 10176,
+      "accuracy_vs_ref": {
+        "finite": true,
+        "max_pos_delta_um": 0.0,
+        "median_pos_delta_um": 0.0,
+        "max_slope_delta_rad": 0.0,
+        "max_rel_err": 0.0,
+        "bit_exact": true
+      },
+      "resources": {
+        "num_regs": 124,
+        "local_size_bytes": 384,
+        "shared_size_bytes": 0,
+        "max_threads_per_block": 512,
+        "theoretical_occupancy": 0.25
+      }
+    },
+    "pinn_fused": {
+      "ns_per_track": 4.844032049179077,
+      "kernel_only_ms": {
+        "median": 4.844032049179077,
+        "p25": 4.841472148895264,
+        "p75": 4.849152207374573,
+        "min": 4.837376117706299,
+        "max": 4.882431983947754,
+        "rel_iqr": 0.001585468139214857
+      },
+      "single_warp_us": 237.56800591945648,
+      "pct_fp32_peak": 29.73178906915826,
+      "macs_per_track": 10176,
+      "accuracy_vs_ref": {
+        "finite": true,
+        "max_pos_delta_um": 0.0,
+        "median_pos_delta_um": 0.0,
+        "max_slope_delta_rad": 0.0,
+        "max_rel_err": 0.0,
+        "bit_exact": true
+      },
+      "resources": {
+        "num_regs": 128,
+        "local_size_bytes": 0,
+        "shared_size_bytes": 0,
+        "max_threads_per_block": 512,
+        "theoretical_occupancy": 0.25
+      }
+    },
+    "pinn_fused_ftanh": {
+      "ns_per_track": 4.932608127593994,
+      "kernel_only_ms": {
+        "median": 4.932608127593994,
+        "p25": 4.931583881378174,
+        "p75": 4.934656143188477,
+        "min": 4.928512096405029,
+        "max": 4.993023872375488,
+        "rel_iqr": 0.0006228473316410214
+      },
+      "single_warp_us": 207.87200331687927,
+      "pct_fp32_peak": 29.19788789317125,
+      "macs_per_track": 10176,
+      "accuracy_vs_ref": {
+        "finite": true,
+        "max_pos_delta_um": 0.48828125,
+        "median_pos_delta_um": 0.0,
+        "max_slope_delta_rad": 5.960464477539063e-08,
+        "max_rel_err": 0.007264824118465185,
+        "bit_exact": false
+      },
+      "resources": {
+        "num_regs": 127,
+        "local_size_bytes": 0,
+        "shared_size_bytes": 0,
+        "max_threads_per_block": 512,
+        "theoretical_occupancy": 0.25
+      }
+    },
+    "pinn_fused_h16": {
+      "ns_per_track": 4.871680021286011,
+      "kernel_only_ms": {
+        "median": 4.871680021286011,
+        "p25": 4.870143890380859,
+        "p75": 4.873216152191162,
+        "min": 4.867072105407715,
+        "max": 4.911104202270508,
+        "rel_iqr": 0.000630637028064033
+      },
+      "single_warp_us": 237.56800591945648,
+      "pct_fp32_peak": 29.563053915929473,
+      "macs_per_track": 10176,
+      "accuracy_vs_ref": {
+        "finite": true,
+        "max_pos_delta_um": 58.7158203125,
+        "median_pos_delta_um": 0.232696533203125,
+        "max_slope_delta_rad": 4.470348358154297e-06,
+        "max_rel_err": 4.875949859619141,
+        "bit_exact": false
+      },
+      "resources": {
+        "num_regs": 127,
+        "local_size_bytes": 0,
+        "shared_size_bytes": 0,
+        "max_threads_per_block": 512,
+        "theoretical_occupancy": 0.25
+      }
+    },
+    "pinn_fused_lb": {
+      "ns_per_track": 7.321088075637817,
+      "kernel_only_ms": {
+        "median": 7.321088075637817,
+        "p25": 7.303423881530762,
+        "p75": 7.336447834968567,
+        "min": 7.245823860168457,
+        "max": 7.369728088378906,
+        "rel_iqr": 0.004510798544781625
+      },
+      "single_warp_us": 209.9200040102005,
+      "pct_fp32_peak": 19.672176818865484,
+      "macs_per_track": 10176,
+      "accuracy_vs_ref": {
+        "finite": true,
+        "max_pos_delta_um": 0.0,
+        "median_pos_delta_um": 0.0,
+        "max_slope_delta_rad": 0.0,
+        "max_rel_err": 0.0,
+        "bit_exact": true
+      },
+      "resources": {
+        "num_regs": 80,
+        "local_size_bytes": 224,
+        "shared_size_bytes": 0,
+        "max_threads_per_block": 256,
+        "theoretical_occupancy": 0.375
+      }
+    },
+    "pinn_h64": {
+      "ns_per_track": 2.269184112548828,
+      "kernel_only_ms": {
+        "median": 2.269184112548828,
+        "p25": 2.268160104751587,
+        "p75": 2.2712318897247314,
+        "min": 2.2671360969543457,
+        "max": 2.3541760444641113,
+        "rel_iqr": 0.0013536957870263747
+      },
+      "single_warp_us": 97.28000313043594,
+      "pct_fp32_peak": 29.538804337897925,
+      "macs_per_track": 4736,
+      "accuracy_vs_ref": {
+        "finite": true,
+        "max_pos_delta_um": 57381.103515625,
+        "median_pos_delta_um": 1193.9163208007812,
+        "max_slope_delta_rad": 0.0077880024909973145,
+        "max_rel_err": 32723.744140625,
+        "bit_exact": false
+      },
+      "resources": {
+        "num_regs": 95,
+        "local_size_bytes": 0,
+        "shared_size_bytes": 0,
+        "max_threads_per_block": 640,
+        "theoretical_occupancy": 0.25
+      }
+    }
+  },
+  "speedup_vs_ref": {
+    "pinn_ref": 1.0,
+    "pinn_fused": 1.453123373464729,
+    "pinn_fused_ftanh": 1.4270292734379055,
+    "pinn_fused_h16": 1.44487654396814,
+    "pinn_fused_lb": 0.9614658531288227,
+    "pinn_h64": 3.101985490532955
+  },
+  "pinn_fused_block_sweep_ns": {
+    "64": 4.818943977355957,
+    "128": 4.841472148895264,
+    "192": 4.718592166900635,
+    "256": 4.843520164489746,
+    "384": 4.853759765625,
+    "512": 4.9244160652160645
+  },
+  "gemm_ceiling": {
+    "fp32": {
+      "ns_per_track": 7.730175971984863,
+      "kernel_only_ms": {
+        "median": 7.730175971984863,
+        "p25": 7.725056171417236,
+        "p75": 7.734016060829163,
+        "min": 7.705599784851074,
+        "max": 7.7608962059021,
+        "rel_iqr": 0.0011590796179023664
+      },
+      "hbm_traffic_floor_ns_per_track": 1.754917331812999,
+      "note": "3 separate cuBLAS GEMMs; intermediate activations streamed through HBM"
+    },
+    "fp16": {
+      "ns_per_track": 6.172671794891357,
+      "kernel_only_ms": {
+        "median": 6.172671794891357,
+        "p25": 6.1675519943237305,
+        "p75": 6.17574405670166,
+        "min": 6.160384178161621,
+        "max": 6.201344013214111,
+        "rel_iqr": 0.0013271501628694439
+      },
+      "hbm_traffic_floor_ns_per_track": 0.8774586659064995,
+      "note": "3 separate cuBLAS GEMMs; intermediate activations streamed through HBM"
+    }
+  }
+}

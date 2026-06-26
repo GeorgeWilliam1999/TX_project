@@ -1,0 +1,28 @@
+{
+  "hw": "V100 (same protocol as throughput bench)",
+  "cc": "70",
+  "n_tracks": 1000000,
+  "block": 256,
+  "warmup": 200,
+  "repeats": 50,
+  "published_same_protocol": {
+    "extrapUTT": 2.34,
+    "NN_baseline": 7.05,
+    "NN_fused_h96": 4.85,
+    "NN_h64_fu": 0.91
+  },
+  "methods": {
+    "rk_field_cashkarp_100mm": {
+      "ns_per_track": 5.629440069198608,
+      "median_ms": 5.629440069198608,
+      "rel_iqr": 0.016780386982101117,
+      "step_mm": 100.0
+    },
+    "nystrom_fast_500mm": {
+      "ns_per_track": 0.4049919992685318,
+      "median_ms": 0.4049919992685318,
+      "rel_iqr": 0.009481667401498526,
+      "step_mm": 500.0
+    }
+  }
+}

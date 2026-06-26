@@ -1,0 +1,137 @@
+{
+  "set": "plane_ref UT->T (z 2665->7826)",
+  "n_total": 7947,
+  "n_integrator_subsample": 1500,
+  "truth": "gen-4 RK4 (Y_true) == DOP853 to <0.2 um",
+  "convention_crosscheck_um": 0.0013026707772231332,
+  "metric": "median |dpos| (um) primary; |dx| matches the project's median_dx_um",
+  "gpu_speed_ns_per_track": {
+    "extrapUTT": 2.34,
+    "RK_field_cashkarp": 5.71,
+    "NN_baseline_h96": 7.05,
+    "NN_fused_h96_bitexact": 4.85,
+    "NN_h64_fu": 0.91
+  },
+  "results": {
+    "extrapUTT (Allen fast UT->T)": {
+      "median_dx_um": 11.446495339669127,
+      "median_pos_um": 15.831841049501765,
+      "p68_pos_um": 71.41123338293407,
+      "p95_pos_um": 2063.866467743226,
+      "p99_pos_um": 16871.893308940274,
+      "max_pos_um": 67738.32257434557,
+      "median_dtx_urad": 4.192191148125191,
+      "median_pos_um_by_p_quartile_lo2hi": [
+        591.5128817823794,
+        31.497359505272577,
+        5.551596683671324,
+        2.850385573277894
+      ]
+    },
+    "Allen RK Cash-Karp (deployed, bug)": {
+      "median_dx_um": 5909.588798035429,
+      "median_pos_um": 5909.614884382543,
+      "p68_pos_um": 11032.021666845207,
+      "p95_pos_um": 40658.20942963561,
+      "p99_pos_um": 64527.42782734564,
+      "max_pos_um": 112602.78702996881,
+      "median_dtx_urad": 77.27851148401754,
+      "median_pos_um_by_p_quartile_lo2hi": [
+        26521.40129468001,
+        9308.439812017674,
+        3759.349395100684,
+        1398.1835154289518
+      ]
+    },
+    "Allen RK Cash-Karp (corrected)": {
+      "median_dx_um": 3.784713744835244,
+      "median_pos_um": 3.9340678410147873,
+      "p68_pos_um": 7.493123379270291,
+      "p95_pos_um": 25.577617548883705,
+      "p99_pos_um": 41.93468399746615,
+      "max_pos_um": 128.59249509220666,
+      "median_dtx_urad": 0.6230824604117058,
+      "median_pos_um_by_p_quartile_lo2hi": [
+        16.83261476743453,
+        6.009772506847014,
+        2.4925593601137983,
+        0.9860811458812166
+      ]
+    },
+    "Allen Nystrom fast-step": {
+      "median_dx_um": 480.8822691277612,
+      "median_pos_um": 519.272168321807,
+      "p68_pos_um": 1051.4147407560147,
+      "p95_pos_um": 3278.4165346004456,
+      "p99_pos_um": 7531.567825611048,
+      "max_pos_um": 39163.8715686286,
+      "median_dtx_urad": 167.65241425813204,
+      "median_pos_um_by_p_quartile_lo2hi": [
+        2051.6951683918887,
+        773.7940275065802,
+        320.95371002228285,
+        116.71675319019717
+      ]
+    },
+    "straight line (control)": {
+      "median_dx_um": 239606.31742525703,
+      "median_pos_um": 239672.59571770497,
+      "p68_pos_um": 444696.5893109922,
+      "p95_pos_um": 1409284.1534412848,
+      "p99_pos_um": 1817078.3727812972,
+      "max_pos_um": 2317439.141216866,
+      "median_dtx_urad": 91327.85371692886,
+      "median_pos_um_by_p_quartile_lo2hi": [
+        1017153.0904191803,
+        379179.2796167533,
+        151365.2431483369,
+        55872.783559945
+      ]
+    },
+    "NN deployed candidate (h96)": {
+      "median_dx_um": 239587.17556505208,
+      "median_pos_um": 239629.5417206373,
+      "p68_pos_um": 444481.3297982095,
+      "p95_pos_um": 1409195.005999085,
+      "p99_pos_um": 1817085.9498637354,
+      "max_pos_um": 2317667.872435382,
+      "median_dtx_urad": 91308.71342014553,
+      "median_pos_um_by_p_quartile_lo2hi": [
+        1017286.6904274956,
+        379354.07646030077,
+        151372.92587241236,
+        55888.109340617666
+      ]
+    },
+    "NN h64 (accuracy-equiv)": {
+      "median_dx_um": 2927.8639039608265,
+      "median_pos_um": 3582.271293065517,
+      "p68_pos_um": 6662.3502556234835,
+      "p95_pos_um": 30474.016683204263,
+      "p99_pos_um": 306577.56869053136,
+      "max_pos_um": 1502706.2536121686,
+      "median_dtx_urad": 9123.146247655852,
+      "median_pos_um_by_p_quartile_lo2hi": [
+        14247.61642666549,
+        5797.898857533667,
+        2537.529006168975,
+        905.5403394792428
+      ]
+    },
+    "NN h96 (wave2)": {
+      "median_dx_um": 3795.0226002657246,
+      "median_pos_um": 4334.60946242375,
+      "p68_pos_um": 7885.28459776277,
+      "p95_pos_um": 30691.808790816813,
+      "p99_pos_um": 337993.5233967964,
+      "max_pos_um": 1463586.9556791654,
+      "median_dtx_urad": 9610.244071848136,
+      "median_pos_um_by_p_quartile_lo2hi": [
+        15678.88664619194,
+        6999.835281564255,
+        3018.5514271311067,
+        1149.8375158781996
+      ]
+    }
+  }
+}

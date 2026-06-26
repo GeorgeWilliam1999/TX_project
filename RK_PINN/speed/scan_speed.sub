@@ -1,0 +1,19 @@
+# HTCondor GPU submit -- scan speed exam (V100, same protocol as the throughput bench).
+universe        = vanilla
+executable      = /data/bfys/gscriven/Ex_rep/RK_PINN/speed/run_scan_speed.sh
+initialdir      = /data/bfys/gscriven/Ex_rep/RK_PINN
+
+should_transfer_files = NO
+output = speed/logs/scan_speed.$(Cluster).out
+error  = speed/logs/scan_speed.$(Cluster).err
+log    = speed/logs/scan_speed.$(Cluster).log
+
++UseOS        = "el9"
++JobCategory  = "short"
+
+request_gpus   = 1
+request_cpus   = 1
+request_memory = 8 GB
+request_disk   = 2 GB
+
+queue

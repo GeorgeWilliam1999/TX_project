@@ -1,0 +1,5 @@
+host wn-lot-009.nikhef.nl Tue Jun 23 14:49:51 CEST 2026
+compiled in 0.8s on cc70 (Tesla V100-PCIE-32GB)
+rk_field_cashkarp_100mm        5.629 ns/track  rel_iqr=1.68%
+nystrom_fast_500mm             0.405 ns/track  rel_iqr=0.95%
+wrote results/nystrom_speed.json

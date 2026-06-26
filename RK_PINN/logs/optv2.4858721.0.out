@@ -1,0 +1,13 @@
+host: wn-lot-008.nikhef.nl  date: Mon Jun 22 15:36:18 CEST 2026
+compiled 2.42s cc70 80SM @ 1.380GHz peak=14.1TF mem_bw~898GB/s
+pinn_ref             7.039 ns  warp=  178.2us regs=124 occ=0.25 %pk= 20.5 dpos=0um dslope=0.00e+00 bitexact=True
+pinn_fused           4.844 ns  warp=  237.6us regs=128 occ=0.25 %pk= 29.7 dpos=0um dslope=0.00e+00 bitexact=True
+pinn_fused_ftanh     4.933 ns  warp=  207.9us regs=127 occ=0.25 %pk= 29.2 dpos=0.488um dslope=5.96e-08 bitexact=False
+pinn_fused_h16       4.872 ns  warp=  237.6us regs=127 occ=0.25 %pk= 29.6 dpos=58.7um dslope=4.47e-06 bitexact=False
+pinn_fused_lb        7.321 ns  warp=  209.9us regs= 80 occ=0.375 %pk= 19.7 dpos=0um dslope=0.00e+00 bitexact=True
+pinn_h64             2.269 ns  warp=   97.3us regs= 95 occ=0.25 %pk= 29.5 dpos=5.74e+04um dslope=7.79e-03 bitexact=False
+pinn_fused block sweep ns/track: {64: 4.819, 128: 4.841, 192: 4.719, 256: 4.844, 384: 4.854, 512: 4.924}
+GEMM ceiling fp32 :   7.730 ns/track  (HBM-traffic floor ~1.755 ns/track)
+GEMM ceiling fp16 :   6.173 ns/track  (HBM-traffic floor ~0.877 ns/track)
+
+wrote /data/bfys/gscriven/pinn_opt_work/results/tier1_opt_v2.json

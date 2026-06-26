@@ -1,0 +1,17 @@
+# PINN optimisation bench — one exclusive GPU slot (V100).
+universe        = vanilla
+executable      = /data/bfys/gscriven/Ex_rep/RK_PINN/condor/run_opt.sh
+arguments       =
+initialdir      = /data/bfys/gscriven/Ex_rep/RK_PINN
+should_transfer_files = NO
+output          = /data/bfys/gscriven/Ex_rep/RK_PINN/logs/opt.$(Cluster).$(Process).out
+error           = /data/bfys/gscriven/Ex_rep/RK_PINN/logs/opt.$(Cluster).$(Process).err
+log             = /data/bfys/gscriven/Ex_rep/RK_PINN/logs/opt.$(Cluster).log
++UseOS          = "el9"
++JobCategory    = "short"
+request_gpus    = 1
+request_cpus    = 1
+request_memory  = 8 GB
+request_disk    = 4 GB
+requirements    = (GPUs_DeviceName =?= "Tesla V100-PCIE-32GB")
+queue 1

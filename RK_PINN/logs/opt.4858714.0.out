@@ -1,0 +1,22 @@
+==========================================
+  PINN optimisation bench
+  host: wn-lot-009.nikhef.nl   date: Mon Jun 22 15:24:17 CEST 2026
+==========================================
+no nvidia-smi
+
+### [1/2] baselines (same-slot re-time) ###
+rk_field       kernel-only median=5.7257 ms  5.7257 ns/track  1.747e+08 tracks/s  rel_iqr=1.55%
+extraputt      kernel-only median=2.3634 ms  2.3634 ns/track  4.231e+08 tracks/s  rel_iqr=0.76%
+pinn_v2_utt    kernel-only median=7.0339 ms  7.0339 ns/track  1.422e+08 tracks/s  rel_iqr=0.14%
+
+RK/NN = 0.8x   extrapUTT/NN = 0.34x   RK/extrapUTT = 2.4x
+wrote /data/bfys/gscriven/pinn_opt_work/results/baselines_sameslot.json
+
+### [2/2] optimised variants ###
+compiled in 0.88s on cc70, 80 SM @ 1.380 GHz => fp32 peak 14.1 TFLOP/s
+pinn_ref         7.034 ns/track  warp=   178.2us regs=124 spill=384B occ=0.25 %peak=20.5 max_rel=0.00e+00 max_abs=0.00e+00
+pinn_fused       4.795 ns/track  warp=   227.3us regs=128 spill=0B occ=0.25 %peak=30.0 max_rel=2.22e-03 max_abs=4.88e-04
+pinn_warp        8.317 ns/track  warp=    18.4us regs=40 spill=0B occ=0.75 %peak=17.3 max_rel=2.22e-03 max_abs=4.88e-04
+pinn_warp_u4     8.355 ns/track  warp=    28.7us regs=34 spill=0B occ=0.75 %peak=17.2 max_rel=2.22e-03 max_abs=4.88e-04
+
+wrote /data/bfys/gscriven/pinn_opt_work/results/tier1_opt.json

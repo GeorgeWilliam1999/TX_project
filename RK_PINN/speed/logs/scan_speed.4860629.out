@@ -1,0 +1,26 @@
+=== scan speed exam: host=wn-pijl-005.nikhef.nl Tue Jun 23 16:55:55 CEST 2026 ===
+d2_tanh    [64, 64]       tanh  MACs=  4736 act/track=128 [real]
+d3_tanh    [64, 64, 64]   tanh  MACs=  8832 act/track=192 [placeholder]
+d2_silu    [64, 64]       silu  MACs=  4736 act/track=128 [real]
+d3_silu    [64, 64, 64]   silu  MACs=  8832 act/track=192 [placeholder]
+d2_gelu    [64, 64]       gelu  MACs=  4736 act/track=128 [real]
+d3_gelu    [64, 64, 64]   gelu  MACs=  8832 act/track=192 [placeholder]
+d2_sin     [64, 64]       sin   MACs=  4736 act/track=128 [real]
+d3_sin     [64, 64, 64]   sin   MACs=  8832 act/track=192 [placeholder]
+h96_tanh   [96, 96]       tanh  MACs= 10176 act/track=192 [real]
+
+wrote 9 kernels + manifest.json -> /data/bfys/gscriven/Ex_rep/RK_PINN/speed/scan_kernels
+host wn-pijl-005.nikhef.nl  cc89 (NVIDIA L40S)  N=1000000
+d2_gelu    [64, 64]       gelu  -> 0.417 ns/track  (fu blk96)  [real]  compile 173.1s
+d2_silu    [64, 64]       silu  -> 0.382 ns/track  (fu blk64)  [real]  compile 81.7s
+d2_sin     [64, 64]       sin   -> 0.517 ns/track  (fused blk128)  [real]  compile 253.7s
+d2_tanh    [64, 64]       tanh  -> 0.319 ns/track  (fu blk96)  [real]  compile 64.1s
+d3_gelu    [64, 64, 64]   gelu  -> 0.992 ns/track  (fused blk256)  [placeholder]  compile 402.4s
+d3_silu    [64, 64, 64]   silu  -> 1.120 ns/track  (fu blk384)  [placeholder]  compile 58.2s
+d3_sin     [64, 64, 64]   sin   -> 0.895 ns/track  (fused blk128)  [placeholder]  compile 173.0s
+d3_tanh    [64, 64, 64]   tanh  -> 0.855 ns/track  (fused blk256)  [placeholder]  compile 26.1s
+h96_tanh   [96, 96]       tanh  -> 0.935 ns/track  (fused blk256)  [real]  compile 24.6s
+
+wrote results/scan_speed.json
+ANCHOR h96_tanh: got 0.935 ns vs published 4.85 ns (CHECK)
+ANCHOR d2_tanh: got 0.319 ns vs published 0.91 ns (CHECK)

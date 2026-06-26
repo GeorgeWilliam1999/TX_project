@@ -1,0 +1,105 @@
+{
+  "d2_tanh": {
+    "dims": [
+      64,
+      64
+    ],
+    "act": "tanh",
+    "macs": 4736,
+    "n_act": 128,
+    "weights": "real",
+    "run": "scanA_d2_tanh"
+  },
+  "d3_tanh": {
+    "dims": [
+      64,
+      64,
+      64
+    ],
+    "act": "tanh",
+    "macs": 8832,
+    "n_act": 192,
+    "weights": "placeholder",
+    "run": "scanA_d3_tanh"
+  },
+  "d2_silu": {
+    "dims": [
+      64,
+      64
+    ],
+    "act": "silu",
+    "macs": 4736,
+    "n_act": 128,
+    "weights": "real",
+    "run": "scanA_d2_silu"
+  },
+  "d3_silu": {
+    "dims": [
+      64,
+      64,
+      64
+    ],
+    "act": "silu",
+    "macs": 8832,
+    "n_act": 192,
+    "weights": "placeholder",
+    "run": "scanA_d3_silu"
+  },
+  "d2_gelu": {
+    "dims": [
+      64,
+      64
+    ],
+    "act": "gelu",
+    "macs": 4736,
+    "n_act": 128,
+    "weights": "real",
+    "run": "scanA_d2_gelu"
+  },
+  "d3_gelu": {
+    "dims": [
+      64,
+      64,
+      64
+    ],
+    "act": "gelu",
+    "macs": 8832,
+    "n_act": 192,
+    "weights": "placeholder",
+    "run": "scanA_d3_gelu"
+  },
+  "d2_sin": {
+    "dims": [
+      64,
+      64
+    ],
+    "act": "sin",
+    "macs": 4736,
+    "n_act": 128,
+    "weights": "real",
+    "run": "scanA_d2_sin"
+  },
+  "d3_sin": {
+    "dims": [
+      64,
+      64,
+      64
+    ],
+    "act": "sin",
+    "macs": 8832,
+    "n_act": 192,
+    "weights": "placeholder",
+    "run": "scanA_d3_sin"
+  },
+  "h96_tanh": {
+    "dims": [
+      96,
+      96
+    ],
+    "act": "tanh",
+    "macs": 10176,
+    "n_act": 192,
+    "weights": "real",
+    "run": "wave2_resid_h96"
+  }
+}

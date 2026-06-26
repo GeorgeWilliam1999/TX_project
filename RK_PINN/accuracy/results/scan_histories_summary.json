@@ -1,0 +1,13 @@
+{
+  "wave2_resid_h96": {
+    "label": "h96 baseline (resid)",
+    "best_utt_median_um": 3147.03369140625,
+    "best_epoch": 102,
+    "test_utt_median_um": 3195.6787109375,
+    "test_median_pos_mm": 1.07651948928833,
+    "test_median_dtx_mrad": 2.170264720916748,
+    "test_median_dty_mrad": 0.05810428410768509,
+    "train_time_min": 66.78357391754786,
+    "params": null
+  }
+}
